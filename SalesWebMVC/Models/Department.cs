@@ -11,6 +11,11 @@
         {
         }
 
+        public Department(string name)
+        {
+            Name = name;
+        }
+
         public Department(int id, string name)
         {
             Id = id;
