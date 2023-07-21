@@ -8,7 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("SalesWebMVCContext");
 builder.Services.AddTransient<SeedingService>();
 builder.Services.AddDbContext<SalesWebMVCContext>(options => options.UseSqlServer(connectionString));
-//builder.Services.AddTransient<SeedingService>();
 
 //var connectionString = builder.Services.AddDbContext<SalesWebMVCContext>(options => options.
 //UseSqlServer(builder.Configuration.
@@ -46,7 +45,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.MapGet("/", (Func<string>)(() => "Hello World!"));
+//app.MapGet("/", (Func<string>)(() => "Hello World!"));
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
