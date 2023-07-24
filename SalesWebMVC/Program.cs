@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SalesWebMVC.Data;
-
+using SalesWebMVC.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +9,7 @@ var connectionString = builder.Configuration.GetConnectionString("SalesWebMVCCon
 builder.Services.AddTransient<SeedingService>();
 builder.Services.AddDbContext<SalesWebMVCContext>(options => options.UseSqlServer(connectionString));
 
+builder.Services.AddScoped<SellerService>();
 //var connectionString = builder.Services.AddDbContext<SalesWebMVCContext>(options => options.
 //UseSqlServer(builder.Configuration.
 //GetConnectionString("SalesWebMVCContext") ,
