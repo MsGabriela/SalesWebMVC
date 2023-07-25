@@ -10,6 +10,8 @@ builder.Services.AddTransient<SeedingService>();
 builder.Services.AddDbContext<SalesWebMVCContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<SellerService>();
+
+builder.Services.AddScoped<DepartmentService>();
 //var connectionString = builder.Services.AddDbContext<SalesWebMVCContext>(options => options.
 //UseSqlServer(builder.Configuration.
 //GetConnectionString("SalesWebMVCContext") ,
