@@ -1,7 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Localization;
+
 using SalesWebMVC.Data;
 using SalesWebMVC.Services;
+
+using System.Globalization;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,10 +17,7 @@ builder.Services.AddDbContext<SalesWebMVCContext>(options => options.UseSqlServe
 builder.Services.AddScoped<SellerService>();
 
 builder.Services.AddScoped<DepartmentService>();
-//var connectionString = builder.Services.AddDbContext<SalesWebMVCContext>(options => options.
-//UseSqlServer(builder.Configuration.
-//GetConnectionString("SalesWebMVCContext") ,
-//builder => builder.MigrationsAssembly("SalesWebMVC")));
+
 
 
 // Add services to the container.
@@ -39,6 +41,18 @@ void SeedData(IHost app)
     }
 }
 
+
+var enUS = new CultureInfo("en-US");
+var LocalizationOptions = new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture(enUS),
+    SupportedCultures = new List<CultureInfo> { enUS },
+    SupportedUICultures = new List<CultureInfo> { enUS }
+};
+
+app.UseRequestLocalization(LocalizationOptions);
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -48,7 +62,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-//app.MapGet("/", (Func<string>)(() => "Hello World!"));
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -62,3 +76,9 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+
+//var connectionString = builder.Services.AddDbContext<SalesWebMVCContext>(options => options.
+//UseSqlServer(builder.Configuration.
+//GetConnectionString("SalesWebMVCContext") ,
+//builder => builder.MigrationsAssembly("SalesWebMVC")));
